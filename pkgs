@@ -8,7 +8,7 @@ clang-tools-extra
 cmake
 composer
 dav1d
-dotnet-sdk-7.0
+distrobox
 exercism
 fd-find
 flac

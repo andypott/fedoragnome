@@ -1,0 +1,3 @@
+#!/bin/bash
+
+distrobox create --name ps1dev --image debian:latest --home /home/andy/ps1dev --additional-packages "gcc-mipsel-linux-gnu g++-mipsel-linux-gnu binutils-mipsel-linux-gnu build-essential git"
