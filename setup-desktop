@@ -1,0 +1,94 @@
+#!/bin/bash
+
+add_flatpaks() {
+    flatpak install flathub\
+        org.mozilla.firefox\
+        org.videolan.VLC\
+        com.valvesoftware.Steam\
+        org.freedesktop.Platform.ffmpeg-full\
+        org.zealdocs.Zeal
+    
+    flatpak override --user --socket=wayland --env=MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
+}
+
+dot_dirs="./home"
+
+create_dirs() {
+    for dir in $dot_dirs; do
+        if [ -d "$dir" ]; then
+            pushd $dir
+                to_create=$(find . -mindepth 1 -type d -printf "%P ")
+                for d in $to_create; do
+                    mkdir -p "$HOME/$d"
+                done
+            popd
+        fi
+    done
+}
+
+create_links() {
+    for dir in $dot_dirs; do
+        if [ -d "$dir" ]; then
+            pushd $dir
+                to_create=$(find . -mindepth 1 -type f -printf "%P ")
+                for d in $to_create; do
+                    ln -sf "$(pwd)/$d" "$HOME/$d"
+                done
+            popd
+        fi
+    done
+}
+
+get_fonts() {
+    mkdir -p ~/.local/share/fonts
+
+    if [ ! -f ~/.local/share/fonts/SymbolsNerdFont-Regular.ttf ]; then
+        wget -o /dev/null -O ~/.local/share/fonts/SymbolsNerdFont-Regular.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf?raw=true
+    fi
+
+    if [ ! -f ~/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf ]; then
+        wget -o /dev/null -O ~/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf?raw=true
+    fi
+
+    fc-cache -f
+}
+
+configure_gnome() {
+    # Use a dark color scheme
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    
+    # Make touchpad usable
+    gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
+    gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
+
+    # Set screen turn off delay to 15 mins
+    gsettings set org.gnome.desktop.session idle-delay 'uint32 900'
+
+    # Set shortcuts
+    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Gnome Terminal'
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'gnome-terminal'
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>Return'
+
+    # Disable sleep on AC
+    gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled false
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+
+    # Don't use gnome software for updates
+    gsettings set org.gnome.software download-updates false
+    gsettings set org.gnome.software download-updates-notify false
+
+    # Use browser back button as scroll modifier for logitech marble mouse
+    gsettings set org.gnome.desktop.peripherals.trackball scroll-wheel-emulation-button 8
+}
+
+install_rustup() {
+    cd "$HOME" && curl -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+}
+
+add_flatpaks
+create_dirs
+create_links
+get_fonts
+configure_gnome
+install_rustup
