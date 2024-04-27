@@ -1,3 +1,36 @@
 #!/bin/bash
 
 distrobox create --name ps1dev --image debian:latest --home /home/andy/ps1dev --additional-packages "gcc-mipsel-linux-gnu g++-mipsel-linux-gnu binutils-mipsel-linux-gnu build-essential git"
+
+
+dot_dirs="./ps1dev"
+
+create_dirs() {
+    for dir in $dot_dirs; do
+        if [ -d "$dir" ]; then
+            pushd $dir
+                to_create=$(find . -mindepth 1 -type d -printf "%P ")
+                for d in $to_create; do
+                    mkdir -p "$HOME/ps1dev/$d"
+                done
+            popd
+        fi
+    done
+}
+
+create_links() {
+    for dir in $dot_dirs; do
+        if [ -d "$dir" ]; then
+            pushd $dir
+                to_create=$(find . -mindepth 1 -type f -printf "%P ")
+                for d in $to_create; do
+                    ln -sf "$(pwd)/$d" "$HOME/ps1dev/$d"
+                done
+            popd
+        fi
+    done
+}
+
+mkdir -p ~/ps1dev
+create_dirs
+create_links
