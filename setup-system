@@ -18,7 +18,6 @@ sudo flatpak remote-modify --enable flathub
 sudo rsync -rv ./system/ /
 
 # Enable systemd services
-# This assumes /etc/rpm-ostreed.conf has been updated (which it should have been when config files were copied)
 sudo systemctl enable sshd
 
 if [ "$1" == "ultra24" ]; then

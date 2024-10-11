@@ -6,7 +6,6 @@ add_flatpaks() {
         org.videolan.VLC\
         com.valvesoftware.Steam\
         org.freedesktop.Platform.ffmpeg-full\
-        org.zealdocs.Zeal
     
     flatpak override --user --socket=wayland --env=MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
 }
@@ -64,15 +63,9 @@ configure_gnome() {
     # Set screen turn off delay to 15 mins
     gsettings set org.gnome.desktop.session idle-delay 'uint32 900'
 
-    # Set shortcuts
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Gnome Terminal'
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command 'gnome-terminal'
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Super>Return'
-
     # Disable sleep on AC
-    gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled false
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+    gsettings set org.gnome.settings-daemon.plugins.power ambient-enabled false
 
     # Don't use gnome software for updates
     gsettings set org.gnome.software download-updates false
