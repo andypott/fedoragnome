@@ -2,10 +2,17 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		lazy = false,
+		branch = "main",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				highlight = { enable = true },
-				ensure_installed = "all",
+			require("nvim-treesitter").install({
+				"asm",
+				"bash",
+				"c",
+				"c_sharp",
+				"cpp",
+				"javascript",
+				"typescript",
 			})
 		end,
 	},
