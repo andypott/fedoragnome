@@ -31,9 +31,6 @@ return {
 					typescriptreact = {
 						require("formatter.filetypes.typescriptreact").prettier,
 					},
-					rust = {
-						require("formatter.filetypes.rust").rustfmt,
-					},
 				},
 			})
 
