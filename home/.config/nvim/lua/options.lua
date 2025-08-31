@@ -14,7 +14,6 @@ vim.opt.scrolloff = 5
 vim.opt.hidden = true -- allow buffers to remain open in background with unsaved changes
 vim.opt.number = true -- enable line numbers
 vim.opt.signcolumn = "number" -- show diag errors in the number column (saves on width)
-vim.opt.relativenumber = true
 vim.opt.splitright = true
 
 vim.g.c_syntax_for_h = true
