@@ -2,6 +2,16 @@
 return {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
+	settings = {
+		Lua = {
+			workspace = {
+				checkThirdParty = false,
+				library = {
+					vim.env.VIMRUNTIME,
+				},
+			},
+		},
+	},
 	root_markers = {
 		".luarc.json",
 		".luarc.jsonc",

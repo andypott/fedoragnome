@@ -6,4 +6,10 @@ require("lazy").setup({ spec = { import = "plugins" }, { checker = { enabled = t
 require("options")
 require("mappings")
 
+vim.filetype.add({
+	extension = {
+		inc = "asm",
+	},
+})
+
 vim.lsp.enable({ "luals", "tsls" })

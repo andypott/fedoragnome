@@ -11,7 +11,11 @@ return {
 				"c",
 				"c_sharp",
 				"cpp",
+				"css",
 				"javascript",
+				"json",
+				"lua",
+				"make",
 				"typescript",
 			})
 		end,
