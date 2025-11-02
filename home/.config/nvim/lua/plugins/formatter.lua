@@ -4,9 +4,9 @@ return {
 		config = function()
 			require("formatter").setup({
 				filetype = {
-					c = {
-						require("formatter.filetypes.c").clangformat,
-					},
+					-- c = {
+					-- 	require("formatter.filetypes.c").clangformat,
+					-- },
 					css = {
 						require("formatter.filetypes.css").prettier,
 					},
