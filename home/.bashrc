@@ -18,6 +18,7 @@ declare -a paths=(
     "$HOME/go/bin"
     "$HOME/.config/composer/vendor/bin"
     "$HOME/.luarocks/bin"
+    "$HOME/odin"
 )
 
 for p in "${paths[@]}"; do

@@ -16,6 +16,7 @@ return {
 				"json",
 				"lua",
 				"make",
+        "odin",
 				"typescript",
 			})
 		end,
