@@ -12,4 +12,4 @@ vim.filetype.add({
 	},
 })
 
-vim.lsp.enable({ "luals", "tsls", "clangd" })
+vim.lsp.enable({ "luals", "ts_ls", "clangd" })
