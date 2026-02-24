@@ -17,6 +17,7 @@ return {
 		local lsps = {
 			"typescript-language-server",
 			"lua-language-server",
+			"ols",
 		}
 
 		function ensure_installed()
