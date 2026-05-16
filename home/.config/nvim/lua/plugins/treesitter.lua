@@ -4,6 +4,7 @@ return {
 		build = ":TSUpdate",
 		lazy = false,
 		branch = "main",
+		commit = "90cd6580e720caedacb91fdd587b747a6e77d61f",
 		config = function()
 			require("nvim-treesitter").install({
 				"asm",
@@ -16,7 +17,7 @@ return {
 				"json",
 				"lua",
 				"make",
-        "odin",
+				"odin",
 				"typescript",
 			})
 		end,
